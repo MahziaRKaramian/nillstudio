@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تماس — نیل استودیو</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="نیل استودیو" style="height: 32px; width: auto;">
+    </a>
+    <div class="theme-toggle">
+      <input type="checkbox" id="darkModeToggle">
+      <label for="darkModeToggle"></label>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">آثار</a></li>
+        <li><a href="about.html">درباره ما</a></li>
+        <li><a href="contact.html" class="active">تماس</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="contact-page">
+    <div class="contact-hero-section">
+      <div class="container">
+        <div class="hero-badge reveal" style="display: inline-flex; margin-bottom: 24px;">
+          <span class="hero-badge-dot"></span>
+          تماس با ما
+        </div>
+        <h1 class="reveal">
+          بیا با هم یه <span class="gradient-text">داستان</span> بسازیم
+        </h1>
+        <p class="section-subtitle reveal" style="margin: 0 auto; max-width: 600px;">
+          اگه ایده‌ای داری یا می‌خوای با تیم ما همکاری کنی، خوشحال می‌شیم بشنویم.
+        </p>
+      </div>
+    </div>
+
+    <div class="contact-content-section">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-info-cards">
+            <div class="reveal">
+              <div class="contact-info-card">
+                <div class="contact-info-card-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                  <h4>ایمیل</h4>
+                  <p>karamianmahziar@gmail.com</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="reveal">
+              <div class="contact-info-card">
+                <div class="contact-info-card-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                  <h4>مکان</h4>
+                  <p>تهران، ایران</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="reveal">
+              <div class="contact-info-card">
+                <div class="contact-info-card-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div>
+                  <h4>تلفن</h4>
+                  <p>09925682257</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="reveal">
+              <div class="contact-info-card">
+                <div class="contact-info-card-icon">
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div>
+                  <h4>وضعیت</h4>
+                  <p>آماده همکاری روی پروژه‌های جدید</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="reveal">
+              <h4 style="margin-bottom: 16px; font-size: 0.9rem; font-weight: 600;">ما را دنبال کنید</h4>
+              <div class="contact-socials">
+                <a href="https://linkedin.com/in/mahziar-karamian-b6a629224/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://t.me/@M_ahzia_R" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+                <a href="https://wa.me/989925682257" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <div class="contact-form-card">
+              <h3>ارسال پیام</h3>
+              <p>ظرف ۲۴ ساعت پاسخ می‌دیم.</p>
+              <form id="contactForm">
+                <div class="form-group">
+                  <label for="name">نام</label>
+                  <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">ایمیل</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                  <label for="subject">موضوع</label>
+                  <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                  <label for="message">پیام</label>
+                  <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary submit-btn" style="width: 100%; justify-content: center;">
+                  ارسال پیام <i class="fas fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="logo.png" alt="نیل استودیو" style="height: 28px; width: auto; margin-bottom: 16px;">
+          <p>استودیوی طراحی و روایت داستان‌های تصویری. ما داستان می‌سازیم.</p>
+          <div class="footer-social">
+            <a href="https://linkedin.com/in/mahziar-karamian-b6a629224/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://t.me/@M_ahzia_R" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
+            <a href="https://wa.me/989925682257" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+        <div class="footer-links">
+          <h4>دسترسی سریع</h4>
+          <a href="index.html">آثار</a>
+          <a href="about.html">درباره ما</a>
+          <a href="contact.html">تماس</a>
+        </div>
+        <div class="footer-links">
+          <h4>ارتباط</h4>
+          <a href="mailto:karamianmahziar@gmail.com">karamianmahziar@gmail.com</a>
+          <a href="tel:09925682257">09925682257</a>
+          <a href="contact.html">ارسال پیام</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 نیل استودیو. ساخته شده با عشق.
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
