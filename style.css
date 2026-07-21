@@ -2343,6 +2343,7 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
   width: 0;
   height: 0;
   z-index: 2;
+  transform: rotate(calc(var(--i) * 60deg));
   opacity: 0;
   animation: orbit-enter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   animation-delay: calc(0.5s + var(--i) * 0.1s);
@@ -2368,7 +2369,7 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
   cursor: pointer;
   border: 2.5px solid rgba(255,255,255,0.1);
   box-shadow: 0 8px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.12);
-  transform: rotate(calc(var(--i) * 60deg)) translateY(-250px) rotate(calc(var(--i) * -60deg));
+  transform: translateY(-250px) rotate(calc(var(--i) * -60deg));
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
               box-shadow 0.5s ease,
               border-color 0.4s ease,
@@ -2393,7 +2394,7 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
   width: 110px;
   height: 110px;
   margin: -55px 0 0 -55px;
-  transform: rotate(calc(var(--i) * 60deg)) translateY(-250px) rotate(calc(var(--i) * -60deg));
+  transform: translateY(-250px) rotate(calc(var(--i) * -60deg));
   border-color: var(--secondary);
   box-shadow: 0 0 0 6px rgba(241,179,79,0.15),
               0 0 60px rgba(241,179,79,0.12),
@@ -2414,8 +2415,8 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
 }
 
 @keyframes orbit-float {
-  0%, 100% { transform: rotate(calc(var(--i) * 60deg)) translateY(-250px) rotate(calc(var(--i) * -60deg)); }
-  50% { transform: rotate(calc(var(--i) * 60deg)) translateY(-265px) rotate(calc(var(--i) * -60deg)); }
+  0%, 100% { transform: translateY(-250px) rotate(calc(var(--i) * -60deg)); }
+  50% { transform: translateY(-265px) rotate(calc(var(--i) * -60deg)); }
 }
 
 .orbit-member:hover .orbit-avatar {
@@ -2434,7 +2435,7 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   text-align: center;
   z-index: 20;
-  transform: rotate(calc(var(--i) * 60deg)) translateY(-250px) rotate(calc(var(--i) * -60deg)) translateY(60px);
+  transform: translateY(-250px) rotate(calc(var(--i) * -60deg)) translateY(60px);
 }
 
 .orbit-hover-name {
@@ -2455,12 +2456,28 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
 
 .orbit-member:hover .orbit-hover {
   opacity: 1;
-  transform: rotate(calc(var(--i) * 60deg)) translateY(-250px) rotate(calc(var(--i) * -60deg)) translateY(68px);
+  transform: translateY(-250px) rotate(calc(var(--i) * -60deg)) translateY(68px);
 }
 
-/* === Ring spin animation === */
+/* === Ring animation & hover scale === */
 .orbit-ring {
   animation: ring-spin 50s linear infinite;
+  transition: border-color 0.5s ease, scale 0.5s ease;
+  scale: 1;
+}
+
+.team-orbit:hover .orbit-ring {
+  scale: 1.04;
+  border-color: rgba(241,179,79,0.25);
+}
+
+.orbit-ring-glow {
+  transition: scale 0.5s ease;
+  scale: 1;
+}
+
+.team-orbit:hover .orbit-ring-glow {
+  scale: 1.04;
 }
 
 @keyframes ring-spin {
@@ -2478,27 +2495,27 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
     height: 72px;
     margin: -36px 0 0 -36px;
     font-size: 1rem;
-    transform: rotate(calc(var(--i) * 60deg)) translateY(-190px) rotate(calc(var(--i) * -60deg));
+    transform: translateY(-190px) rotate(calc(var(--i) * -60deg));
   }
   @keyframes orbit-float {
-    0%, 100% { transform: rotate(calc(var(--i) * 60deg)) translateY(-190px) rotate(calc(var(--i) * -60deg)); }
-    50% { transform: rotate(calc(var(--i) * 60deg)) translateY(-200px) rotate(calc(var(--i) * -60deg)); }
+    0%, 100% { transform: translateY(-190px) rotate(calc(var(--i) * -60deg)); }
+    50% { transform: translateY(-200px) rotate(calc(var(--i) * -60deg)); }
   }
   .orbit-member:hover .orbit-avatar {
     width: 84px;
     height: 84px;
     margin: -42px 0 0 -42px;
-    transform: rotate(calc(var(--i) * 60deg)) translateY(-190px) rotate(calc(var(--i) * -60deg));
+    transform: translateY(-190px) rotate(calc(var(--i) * -60deg));
   }
 
   .orbit-hover {
     width: 150px;
-    transform: rotate(calc(var(--i) * 60deg)) translateY(-190px) rotate(calc(var(--i) * -60deg)) translateY(48px);
+    transform: translateY(-190px) rotate(calc(var(--i) * -60deg)) translateY(48px);
   }
   .orbit-hover-name { font-size: 0.8rem; }
   .orbit-hover-role { font-size: 0.7rem; }
   .orbit-member:hover .orbit-hover {
-    transform: rotate(calc(var(--i) * 60deg)) translateY(-190px) rotate(calc(var(--i) * -60deg)) translateY(55px);
+    transform: translateY(-190px) rotate(calc(var(--i) * -60deg)) translateY(55px);
   }
 
   .orbit-center { width: 68px; height: 68px; margin: -34px 0 0 -34px; }
@@ -2515,27 +2532,27 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
     height: 58px;
     margin: -29px 0 0 -29px;
     font-size: 0.85rem;
-    transform: rotate(calc(var(--i) * 60deg)) translateY(-150px) rotate(calc(var(--i) * -60deg));
+    transform: translateY(-150px) rotate(calc(var(--i) * -60deg));
   }
   @keyframes orbit-float {
-    0%, 100% { transform: rotate(calc(var(--i) * 60deg)) translateY(-150px) rotate(calc(var(--i) * -60deg)); }
-    50% { transform: rotate(calc(var(--i) * 60deg)) translateY(-157px) rotate(calc(var(--i) * -60deg)); }
+    0%, 100% { transform: translateY(-150px) rotate(calc(var(--i) * -60deg)); }
+    50% { transform: translateY(-157px) rotate(calc(var(--i) * -60deg)); }
   }
   .orbit-member:hover .orbit-avatar {
     width: 66px;
     height: 66px;
     margin: -33px 0 0 -33px;
-    transform: rotate(calc(var(--i) * 60deg)) translateY(-150px) rotate(calc(var(--i) * -60deg));
+    transform: translateY(-150px) rotate(calc(var(--i) * -60deg));
   }
 
   .orbit-hover {
     width: 120px;
-    transform: rotate(calc(var(--i) * 60deg)) translateY(-150px) rotate(calc(var(--i) * -60deg)) translateY(40px);
+    transform: translateY(-150px) rotate(calc(var(--i) * -60deg)) translateY(40px);
   }
   .orbit-hover-name { font-size: 0.7rem; }
   .orbit-hover-role { font-size: 0.62rem; }
   .orbit-member:hover .orbit-hover {
-    transform: rotate(calc(var(--i) * 60deg)) translateY(-150px) rotate(calc(var(--i) * -60deg)) translateY(46px);
+    transform: translateY(-150px) rotate(calc(var(--i) * -60deg)) translateY(46px);
   }
 
   .orbit-center { width: 54px; height: 54px; margin: -27px 0 0 -27px; }
