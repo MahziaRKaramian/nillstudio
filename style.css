@@ -37,20 +37,20 @@
 
 .light {
   --gradient-hero: #e8e6ff;
-  --bg: #fafaff;
-  --bg-card: rgba(62,55,196,0.03);
-  --bg-card-hover: rgba(62,55,196,0.06);
-  --surface: rgba(62,55,196,0.04);
-  --surface-hover: rgba(62,55,196,0.08);
+  --bg: #f4f4fd;
+  --bg-card: rgba(62,55,196,0.04);
+  --bg-card-hover: rgba(62,55,196,0.08);
+  --surface: rgba(62,55,196,0.05);
+  --surface-hover: rgba(62,55,196,0.09);
   --text: #0a0a1a;
-  --text-secondary: rgba(10,10,26,0.55);
-  --text-tertiary: rgba(10,10,26,0.35);
-  --border: rgba(62,55,196,0.1);
-  --border-hover: rgba(62,55,196,0.2);
-  --glass: rgba(255,255,255,0.6);
-  --glass-border: rgba(108,60,225,0.1);
-  --shadow: 0 25px 50px -12px rgba(108,60,225,0.15);
-  --shadow-lg: 0 50px 100px -20px rgba(108,60,225,0.2);
+  --text-secondary: rgba(10,10,26,0.75);
+  --text-tertiary: rgba(10,10,26,0.55);
+  --border: rgba(62,55,196,0.12);
+  --border-hover: rgba(62,55,196,0.25);
+  --glass: rgba(255,255,255,0.7);
+  --glass-border: rgba(108,60,225,0.12);
+  --shadow: 0 25px 50px -12px rgba(108,60,225,0.18);
+  --shadow-lg: 0 50px 100px -20px rgba(108,60,225,0.25);
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -2236,10 +2236,11 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
   font-weight: 400;
 }
 
-/* ===== TEAM SECTION ===== */
+/* ===== TEAM ORBIT SECTION ===== */
 .team-section {
-  padding: 100px 0;
+  padding: 100px 0 160px;
   position: relative;
+  overflow: hidden;
 }
 
 .team-section::before {
@@ -2257,96 +2258,292 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
   margin-bottom: 60px;
 }
 
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-.team-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  transition: var(--transition);
-  text-align: center;
-  position: relative;
-}
-
-.team-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--primary), var(--secondary));
-  opacity: 0;
-  transition: var(--transition);
-}
-
-.team-card:hover {
-  border-color: rgba(241,179,79,0.25);
-  transform: translateY(-6px);
-  box-shadow: 0 30px 60px -15px rgba(241,179,79,0.15), var(--shadow);
-}
-
-.team-card:hover::before {
-  opacity: 1;
-}
-
-.team-card-image {
-  width: 100%;
-  aspect-ratio: 1;
-  background: var(--surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  color: var(--text-secondary);
-  overflow: hidden;
-}
-
-.team-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.team-card-info {
-  padding: 16px;
-}
-
-.team-card-name {
-  font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 4px;
-}
-
-.team-card-role {
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-}
-
 .team-description {
   text-align: center;
-  max-width: 700px;
+  max-width: 680px;
   margin: 0 auto 50px;
   color: var(--text-secondary);
   line-height: 1.9;
   font-size: 1rem;
 }
 
-@media (max-width: 768px) {
-  .team-grid {
-    grid-template-columns: repeat(2, 1fr);
+/* === Orbit Container === */
+.team-orbit {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  aspect-ratio: 1;
+}
+
+/* === Rings === */
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.orbit-ring-outer {
+  border: 1px solid var(--border);
+  animation: ring-spin 60s linear infinite;
+}
+.orbit-ring-mid {
+  inset: 32px;
+  border: 1px solid var(--border);
+  border-color: rgba(241,179,79,0.12);
+  animation: ring-spin 45s linear infinite reverse;
+}
+.orbit-ring-dots {
+  inset: 64px;
+  border: 1px dashed var(--border);
+  opacity: 0.4;
+  animation: ring-spin 30s linear infinite;
+}
+
+@keyframes ring-spin {
+  to { transform: rotate(360deg); }
+}
+
+.orbit-hexagon {
+  position: absolute;
+  inset: 40px;
+  width: calc(100% - 80px);
+  height: calc(100% - 80px);
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+/* === Center === */
+.orbit-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  margin: -40px 0 0 -40px;
+  z-index: 2;
+}
+.orbit-center-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), #2a258a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  position: relative;
+  box-shadow: 0 0 40px rgba(62,55,196,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.orbit-center-inner::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(241,179,79,0.3);
+  animation: pulse-ring 3s ease-in-out infinite;
+}
+@keyframes pulse-ring {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 0.5; }
+}
+.light .orbit-center-inner {
+  box-shadow: 0 0 40px rgba(62,55,196,0.15), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* === Orbit Members === */
+.orbit-member {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  z-index: 1;
+  transform: rotate(calc(var(--i) * 60deg));
+}
+
+.orbit-avatar {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+  cursor: pointer;
+  transform: rotate(calc(var(--i) * -60deg)) translateY(-250px);
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.5s ease,
+              border-color 0.4s ease;
+  border: 2px solid transparent;
+  backdrop-filter: blur(4px);
+  position: relative;
+  will-change: transform;
+}
+
+.orbit-avatar::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  transition: all 0.5s ease;
+}
+
+.orbit-member:hover .orbit-avatar {
+  transform: rotate(calc(var(--i) * -60deg)) translateY(-250px) scale(1.25);
+  border-color: rgba(241,179,79,0.5);
+  box-shadow: 0 0 0 4px rgba(241,179,79,0.15),
+              0 0 50px rgba(241,179,79,0.15),
+              0 20px 60px -10px rgba(0,0,0,0.3);
+  z-index: 10;
+}
+
+.light .orbit-member:hover .orbit-avatar {
+  box-shadow: 0 0 0 4px rgba(241,179,79,0.2),
+              0 0 50px rgba(241,179,79,0.12),
+              0 20px 60px -10px rgba(62,55,196,0.15);
+}
+
+/* === Hover Card === */
+.orbit-hover {
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+  width: 160px;
+  transform: rotate(calc(var(--i) * -60deg)) translateY(-250px) translateY(68px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+  z-index: 20;
+}
+
+.orbit-hover-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+  white-space: nowrap;
+}
+
+.orbit-hover-role {
+  font-size: 0.72rem;
+  color: var(--secondary);
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.orbit-member:hover .orbit-hover {
+  opacity: 1;
+  transform: rotate(calc(var(--i) * -60deg)) translateY(-250px) translateY(72px);
+}
+
+/* === Member Entrance Animation === */
+.orbit-member {
+  opacity: 0;
+  animation: orbit-enter 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: calc(0.4s + var(--i) * 0.12s);
+}
+
+@keyframes orbit-enter {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
-@media (max-width: 480px) {
-  .team-grid {
-    grid-template-columns: 1fr;
+.orbit-avatar {
+  animation: orbit-float 4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.6s);
+}
+
+@keyframes orbit-float {
+  0%, 100% { transform: rotate(calc(var(--i) * -60deg)) translateY(-250px); }
+  50% { transform: rotate(calc(var(--i) * -60deg)) translateY(-262px); }
+}
+
+.orbit-member:hover .orbit-avatar {
+  animation-play-state: paused;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .team-section { padding: 80px 0 140px; }
+  .orbit-ring-dots { inset: 44px; }
+  .orbit-ring-mid { inset: 22px; }
+  .orbit-hexagon { inset: 26px; width: calc(100% - 52px); height: calc(100% - 52px); }
+
+  .orbit-avatar {
+    width: 76px;
+    height: 76px;
+    margin: -38px 0 0 -38px;
+    font-size: 1rem;
+    transform: rotate(calc(var(--i) * -60deg)) translateY(-190px);
   }
+  @keyframes orbit-float {
+    0%, 100% { transform: rotate(calc(var(--i) * -60deg)) translateY(-190px); }
+    50% { transform: rotate(calc(var(--i) * -60deg)) translateY(-198px); }
+  }
+  .orbit-member:hover .orbit-avatar {
+    transform: rotate(calc(var(--i) * -60deg)) translateY(-190px) scale(1.2);
+  }
+
+  .orbit-hover {
+    width: 140px;
+    transform: rotate(calc(var(--i) * -60deg)) translateY(-190px) translateY(52px);
+  }
+  .orbit-hover-name { font-size: 0.78rem; }
+  .orbit-hover-role { font-size: 0.68rem; }
+  .orbit-member:hover .orbit-hover {
+    transform: rotate(calc(var(--i) * -60deg)) translateY(-190px) translateY(56px);
+  }
+
+  .orbit-center { width: 60px; height: 60px; margin: -30px 0 0 -30px; }
+  .orbit-center-inner svg { width: 22px; height: 22px; }
+}
+
+@media (max-width: 480px) {
+  .team-section { padding: 60px 0 120px; }
+  .orbit-ring-dots { inset: 30px; }
+  .orbit-ring-mid { inset: 15px; }
+
+  .orbit-avatar {
+    width: 60px;
+    height: 60px;
+    margin: -30px 0 0 -30px;
+    font-size: 0.85rem;
+    transform: rotate(calc(var(--i) * -60deg)) translateY(-150px);
+  }
+  @keyframes orbit-float {
+    0%, 100% { transform: rotate(calc(var(--i) * -60deg)) translateY(-150px); }
+    50% { transform: rotate(calc(var(--i) * -60deg)) translateY(-156px); }
+  }
+  .orbit-member:hover .orbit-avatar {
+    transform: rotate(calc(var(--i) * -60deg)) translateY(-150px) scale(1.15);
+  }
+
+  .orbit-hover {
+    width: 120px;
+    transform: rotate(calc(var(--i) * -60deg)) translateY(-150px) translateY(42px);
+  }
+  .orbit-hover-name { font-size: 0.7rem; }
+  .orbit-hover-role { font-size: 0.6rem; }
+  .orbit-member:hover .orbit-hover {
+    transform: rotate(calc(var(--i) * -60deg)) translateY(-150px) translateY(45px);
+  }
+
+  .orbit-center { width: 48px; height: 48px; margin: -24px 0 0 -24px; }
+  .orbit-center-inner svg { width: 18px; height: 18px; }
 }
 
 /* ===== RESPONSIVE ===== */
