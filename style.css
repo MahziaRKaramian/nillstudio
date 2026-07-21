@@ -2423,11 +2423,11 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
   animation-play-state: paused;
 }
 
-/* === Hover Card (slides out from avatar edge) === */
+/* === Hover Card (below avatar, radially outward) === */
 .orbit-hover {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: -85px;
   width: 170px;
   padding: 8px 0;
   opacity: 0;
@@ -2435,28 +2435,35 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   text-align: center;
   z-index: 20;
-  transform: translateY(-250px) rotate(calc(var(--i) * -60deg)) translateY(60px);
+  transform: translateY(-250px) rotate(calc(var(--i) * -60deg)) translateY(75px);
 }
 
 .orbit-hover-name {
   font-size: 0.88rem;
   font-weight: 700;
   color: var(--text);
-  margin-bottom: 2px;
+  margin-bottom: 3px;
   white-space: nowrap;
-  transition: color 0.3s;
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 50px;
+  border: 1px solid var(--border);
+  display: inline-block;
 }
 
 .orbit-hover-role {
   font-size: 0.75rem;
   color: var(--secondary);
   font-weight: 500;
-  opacity: 0.9;
+  opacity: 0.95;
+  letter-spacing: 0.5px;
 }
 
 .orbit-member:hover .orbit-hover {
   opacity: 1;
-  transform: translateY(-250px) rotate(calc(var(--i) * -60deg)) translateY(68px);
+  transform: translateY(-250px) rotate(calc(var(--i) * -60deg)) translateY(85px);
 }
 
 /* === Ring animation & hover scale === */
@@ -2510,12 +2517,13 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
 
   .orbit-hover {
     width: 150px;
-    transform: translateY(-190px) rotate(calc(var(--i) * -60deg)) translateY(48px);
+    left: -75px;
+    transform: translateY(-190px) rotate(calc(var(--i) * -60deg)) translateY(58px);
   }
   .orbit-hover-name { font-size: 0.8rem; }
   .orbit-hover-role { font-size: 0.7rem; }
   .orbit-member:hover .orbit-hover {
-    transform: translateY(-190px) rotate(calc(var(--i) * -60deg)) translateY(55px);
+    transform: translateY(-190px) rotate(calc(var(--i) * -60deg)) translateY(66px);
   }
 
   .orbit-center { width: 68px; height: 68px; margin: -34px 0 0 -34px; }
@@ -2547,12 +2555,13 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
 
   .orbit-hover {
     width: 120px;
-    transform: translateY(-150px) rotate(calc(var(--i) * -60deg)) translateY(40px);
+    left: -60px;
+    transform: translateY(-150px) rotate(calc(var(--i) * -60deg)) translateY(46px);
   }
   .orbit-hover-name { font-size: 0.7rem; }
   .orbit-hover-role { font-size: 0.62rem; }
   .orbit-member:hover .orbit-hover {
-    transform: translateY(-150px) rotate(calc(var(--i) * -60deg)) translateY(46px);
+    transform: translateY(-150px) rotate(calc(var(--i) * -60deg)) translateY(53px);
   }
 
   .orbit-center { width: 54px; height: 54px; margin: -27px 0 0 -27px; }
