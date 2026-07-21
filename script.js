@@ -258,6 +258,57 @@
   }
 })();
 
+// === Team Orbit Tooltip ===
+(function() {
+  const tooltip = document.createElement('div');
+  tooltip.className = 'team-tooltip';
+  tooltip.innerHTML = '<div class="team-tooltip-name"></div><div class="team-tooltip-role"></div>';
+  document.body.appendChild(tooltip);
+  const nameEl = tooltip.querySelector('.team-tooltip-name');
+  const roleEl = tooltip.querySelector('.team-tooltip-role');
+
+  let currentMember = null;
+  let hideTimeout = null;
+
+  document.querySelectorAll('.orbit-avatar').forEach(avatar => {
+    const member = avatar.closest('.orbit-member');
+
+    avatar.addEventListener('mouseenter', () => {
+      if (hideTimeout) clearTimeout(hideTimeout);
+
+      const name = member.getAttribute('data-name') || '';
+      const role = member.getAttribute('data-role') || '';
+      nameEl.textContent = name;
+      roleEl.textContent = role;
+
+      const rect = avatar.getBoundingClientRect();
+      const tooltipWidth = tooltip.offsetWidth || 160;
+      const left = rect.left + rect.width / 2 - tooltipWidth / 2;
+      const top = rect.bottom + 12;
+
+      tooltip.style.left = Math.max(8, Math.min(left, window.innerWidth - tooltipWidth - 8)) + 'px';
+      tooltip.style.top = top + 'px';
+      tooltip.classList.add('visible');
+    });
+
+    avatar.addEventListener('mouseleave', () => {
+      hideTimeout = setTimeout(() => {
+        tooltip.classList.remove('visible');
+      }, 80);
+    });
+
+    avatar.addEventListener('mousemove', () => {
+      const rect = avatar.getBoundingClientRect();
+      const tooltipWidth = tooltip.offsetWidth || 160;
+      const left = rect.left + rect.width / 2 - tooltipWidth / 2;
+      const top = rect.bottom + 12;
+
+      tooltip.style.left = Math.max(8, Math.min(left, window.innerWidth - tooltipWidth - 8)) + 'px';
+      tooltip.style.top = top + 'px';
+    });
+  });
+})();
+
 // === 3D Tilt Effect on Project Cards ===
 (function() {
   document.querySelectorAll('.project-card').forEach(card => {
