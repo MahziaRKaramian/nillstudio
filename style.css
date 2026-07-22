@@ -200,6 +200,7 @@ html[dir="rtl"] .team-header .section-title::after {
   z-index: 1000;
   background: transparent;
   transition: var(--transition);
+  direction: ltr;
 }
 
 .navbar.scrolled {
@@ -218,9 +219,6 @@ html[dir="rtl"] .team-header .section-title::after {
   align-items: center;
 }
 .logo img { height: 40px; width: auto; }
-
-.navbar > nav { order: 1; }
-.navbar > .logo { order: -1; }
 
 nav ul {
   display: flex;
