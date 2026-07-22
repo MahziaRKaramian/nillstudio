@@ -217,26 +217,19 @@
       video.pause();
     });
 
-    // Mute button: unlock audio context + play with sound
+    // Mute button: just toggle audio
     muteBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const isMuted = muteBtn.dataset.muted === 'true';
       if (isMuted) {
-        unlockAudio();
-        // Create a silent buffer source to fully activate audio
-        if (audioCtx) {
-          const buf = audioCtx.createBuffer(1, 1, 22050);
-          const src = audioCtx.createBufferSource();
-          src.buffer = buf;
-          src.connect(audioCtx.destination);
-          src.start();
-        }
-        video.pause();
         video.muted = false;
-        video.currentTime = 0;
-        video.play().catch(() => {});
         muteBtn.dataset.muted = 'false';
         muteBtn.innerHTML = '<i class="fas fa-volume-high"></i>';
+        // If video is paused (hover ended), start playing with sound
+        if (video.paused) {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+        }
       } else {
         video.muted = true;
         muteBtn.dataset.muted = 'true';
