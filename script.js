@@ -172,6 +172,21 @@
 // === Card Video: Hover Play + Sound Toggle + Click Nav ===
 (function() {
   let audioCtx = null;
+  const allCards = [];
+
+  function stopAllOthers(caller) {
+    allCards.forEach(entry => {
+      if (entry.card === caller) return;
+      entry.video.pause();
+      entry.video.muted = true;
+      entry.video.currentTime = 0;
+      entry.playingWithSound = false;
+      if (entry.muteBtn) {
+        entry.muteBtn.dataset.muted = 'true';
+        entry.muteBtn.innerHTML = '<i class="fas fa-volume-xmark"></i>';
+      }
+    });
+  }
 
   document.querySelectorAll('.project-card').forEach(card => {
     const video = card.querySelector('.card-video');
@@ -187,6 +202,9 @@
     muteBtn.innerHTML = '<i class="fas fa-volume-xmark"></i>';
     visual.appendChild(muteBtn);
 
+    const entry = { card, video, muteBtn, playingWithSound: false };
+    allCards.push(entry);
+
     function unlockAudio() {
       if (!audioCtx) {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -196,8 +214,6 @@
       }
     }
 
-    let playingWithSound = false;
-
     function navigate() {
       if (!href) return;
       const el = document.querySelector('.page-transition');
@@ -206,7 +222,7 @@
     }
 
     function playMuted() {
-      if (playingWithSound) return;
+      if (entry.playingWithSound) return;
       video.muted = true;
       video.volume = 1;
       video.currentTime = 0;
@@ -214,7 +230,7 @@
     }
 
     function pauseVideo() {
-      if (playingWithSound) return;
+      if (entry.playingWithSound) return;
       video.pause();
     }
 
@@ -225,8 +241,9 @@
       e.stopPropagation();
       const isMuted = muteBtn.dataset.muted === 'true';
       if (isMuted) {
+        stopAllOthers(card);
         unlockAudio();
-        playingWithSound = true;
+        entry.playingWithSound = true;
         video.pause();
         video.muted = false;
         video.volume = 1;
@@ -235,10 +252,10 @@
           muteBtn.dataset.muted = 'false';
           muteBtn.innerHTML = '<i class="fas fa-volume-high"></i>';
         }).catch(() => {
-          playingWithSound = false;
+          entry.playingWithSound = false;
         });
       } else {
-        playingWithSound = false;
+        entry.playingWithSound = false;
         video.muted = true;
         muteBtn.dataset.muted = 'true';
         muteBtn.innerHTML = '<i class="fas fa-volume-xmark"></i>';
