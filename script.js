@@ -171,7 +171,6 @@
 
 // === Card Video: Hover Play + Sound Toggle + Click Nav ===
 (function() {
-  // Single audio context for the page — unlocks audio on first user gesture
   let audioCtx = null;
 
   document.querySelectorAll('.project-card').forEach(card => {
@@ -181,7 +180,6 @@
     if (!video || !link) return;
     const href = link.getAttribute('href');
 
-    // Create mute toggle button
     const muteBtn = document.createElement('button');
     muteBtn.className = 'video-mute-btn';
     muteBtn.dataset.muted = 'true';
@@ -198,6 +196,8 @@
       }
     }
 
+    let playingWithSound = false;
+
     function navigate() {
       if (!href) return;
       const el = document.querySelector('.page-transition');
@@ -205,39 +205,49 @@
       else { window.location.href = href; }
     }
 
-    // Hover → play muted
-    card.addEventListener('mouseenter', () => {
+    function playMuted() {
+      if (playingWithSound) return;
       video.muted = true;
       video.volume = 1;
       video.currentTime = 0;
       video.play().catch(() => {});
-    });
+    }
 
-    card.addEventListener('mouseleave', () => {
+    function pauseVideo() {
+      if (playingWithSound) return;
       video.pause();
-    });
+    }
 
-    // Mute button: just toggle audio
+    card.addEventListener('mouseenter', playMuted);
+    card.addEventListener('mouseleave', pauseVideo);
+
     muteBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const isMuted = muteBtn.dataset.muted === 'true';
       if (isMuted) {
+        unlockAudio();
+        playingWithSound = true;
+        video.pause();
         video.muted = false;
-        muteBtn.dataset.muted = 'false';
-        muteBtn.innerHTML = '<i class="fas fa-volume-high"></i>';
-        // If video is paused (hover ended), start playing with sound
-        if (video.paused) {
-          video.currentTime = 0;
-          video.play().catch(() => {});
-        }
+        video.volume = 1;
+        video.currentTime = 0;
+        video.play().then(() => {
+          muteBtn.dataset.muted = 'false';
+          muteBtn.innerHTML = '<i class="fas fa-volume-high"></i>';
+        }).catch(() => {
+          playingWithSound = false;
+        });
       } else {
+        playingWithSound = false;
         video.muted = true;
         muteBtn.dataset.muted = 'true';
         muteBtn.innerHTML = '<i class="fas fa-volume-xmark"></i>';
+        if (!video.paused) {
+          video.pause();
+        }
       }
     });
 
-    // Click card → navigate
     card.addEventListener('click', (e) => {
       if (e.target.closest('.video-mute-btn')) return;
       navigate();
