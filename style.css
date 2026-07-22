@@ -200,7 +200,6 @@ html[dir="rtl"] .team-header .section-title::after {
   z-index: 1000;
   background: transparent;
   transition: var(--transition);
-  direction: ltr;
 }
 
 .navbar.scrolled {
