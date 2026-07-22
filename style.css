@@ -214,19 +214,13 @@ html[dir="rtl"] .team-header .section-title::after {
   font-size: 1.6rem;
   font-weight: 700;
   position: relative;
+  display: flex;
+  align-items: center;
 }
+.logo img { height: 40px; width: auto; }
 
-.logo::after {
-  content: '';
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--secondary);
-  bottom: 2px;
-  right: -10px;
-  animation: pulse-dot 2s ease-in-out infinite;
-}
+.navbar > nav { order: 1; }
+.navbar > .logo { order: -1; }
 
 nav ul {
   display: flex;
@@ -235,7 +229,7 @@ nav ul {
 }
 
 nav a {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
