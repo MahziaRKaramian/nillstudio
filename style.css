@@ -2274,8 +2274,8 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
   border: 1px solid rgba(241,179,79,0.15);
 }
 .orbit-center-inner img {
-  width: 60%;
-  height: 60%;
+  width: 80%;
+  height: 80%;
   object-fit: contain;
 }
 .orbit-center-inner::after {
