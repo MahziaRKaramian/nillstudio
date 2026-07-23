@@ -2225,304 +2225,94 @@ p, span, li, a, button, label, input, textarea, .project-card-desc,
   font-size: 1rem;
 }
 
-/* === Orbit Container === */
-.team-orbit {
+/* === Team Horizontal Slider === */
+.team-slider {
   position: relative;
-  width: 100%;
-  max-width: 640px;
+  max-width: 900px;
   margin: 0 auto;
-  aspect-ratio: 1;
+  padding: 20px 0;
 }
-
-/* === Main Orbit Ring === */
-.orbit-ring {
-  position: absolute;
-  inset: 70px;
-  border-radius: 50%;
-  pointer-events: none;
-  border: 1.5px solid var(--border);
-}
-
-.orbit-ring-glow {
-  position: absolute;
-  inset: 55px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(241,179,79,0.04) 0%, transparent 65%);
-  pointer-events: none;
-}
-
-/* === Center === */
-.orbit-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 90px;
-  height: 90px;
-  margin: -45px 0 0 -45px;
-  z-index: 3;
-}
-.orbit-center-inner {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: #fff;
+.team-slider-track {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  box-shadow: 0 0 50px rgba(62,55,196,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
-  border: 1px solid rgba(241,179,79,0.15);
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px 8px 24px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) transparent;
 }
-.orbit-center-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-.orbit-center-inner::after {
-  content: '';
-  position: absolute;
-  inset: -5px;
-  border-radius: 50%;
-  border: 1px solid rgba(241,179,79,0.25);
-  animation: pulse-ring 3s ease-in-out infinite;
-}
-@keyframes pulse-ring {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.06); opacity: 0.4; }
-}
-.light .orbit-center-inner {
-  box-shadow: 0 0 50px rgba(62,55,196,0.15), inset 0 1px 0 rgba(255,255,255,0.2);
-  border: 1px solid rgba(0,0,0,0.08);
-}
-
-/* === Orbit Members — positioned ON the ring === */
-.orbit-member {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  z-index: 2;
-  transform: rotate(calc(var(--i) * 60deg));
-  opacity: 0;
-  animation: orbit-enter 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-  animation-delay: calc(0.5s + var(--i) * 0.1s);
-}
-
-@keyframes orbit-enter {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
-}
-
-.orbit-avatar {
-  position: absolute;
-  width: 94px;
-  height: 94px;
-  margin: -47px 0 0 -47px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #fff;
-  cursor: pointer;
-  border: 2.5px solid rgba(255,255,255,0.1);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.12);
-  transform: translateY(-250px) rotate(calc(var(--i) * -60deg));
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-              box-shadow 0.5s ease,
-              border-color 0.4s ease,
-              width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-              height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-              margin 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-  will-change: transform;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
-}
-
-.orbit-avatar::after {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  transition: all 0.5s ease;
-  pointer-events: none;
-}
-
-.orbit-member:hover .orbit-avatar {
-  width: 110px;
-  height: 110px;
-  margin: -55px 0 0 -55px;
-  transform: translateY(-250px) rotate(calc(var(--i) * -60deg));
-  border-color: var(--secondary);
-  box-shadow: 0 0 0 6px rgba(241,179,79,0.15),
-              0 0 60px rgba(241,179,79,0.12),
-              0 30px 80px -10px rgba(0,0,0,0.4);
-  z-index: 10;
-}
-
-.light .orbit-member:hover .orbit-avatar {
-  box-shadow: 0 0 0 6px rgba(241,179,79,0.2),
-              0 0 60px rgba(241,179,79,0.08),
-              0 30px 80px -10px rgba(62,55,196,0.15);
-}
-
-/* === Floating animation === */
-.orbit-avatar {
-  animation: orbit-float 5s ease-in-out infinite;
-  animation-delay: calc(var(--i) * -0.7s);
-}
-
-@keyframes orbit-float {
-  0%, 100% { transform: translateY(-250px) rotate(calc(var(--i) * -60deg)); }
-  50% { transform: translateY(-265px) rotate(calc(var(--i) * -60deg)); }
-}
-
-.orbit-member:hover .orbit-avatar {
-  animation-play-state: paused;
-}
-
-/* === Team Tooltip (floating, positioned by JS) === */
-.team-tooltip {
-  position: fixed;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.25s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  transform: translateY(6px);
+.team-slider-track::-webkit-scrollbar { height: 4px; }
+.team-slider-track::-webkit-scrollbar-track { background: transparent; }
+.team-slider-track::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+.team-slide {
+  flex: 0 0 200px;
+  scroll-snap-align: center;
   text-align: center;
 }
-.team-tooltip.visible {
-  opacity: 1;
-  transform: translateY(0);
+.team-slide-img {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 16px;
+  border: 3px solid var(--primary);
+  box-shadow: 0 0 30px rgba(62,55,196,0.2);
+  background: var(--bg-card);
 }
-.team-tooltip-name {
-  font-size: 0.9rem;
+.team-slide-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.team-slide-name {
+  font-size: 1rem;
   font-weight: 700;
   color: var(--text);
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 6px 18px;
-  border-radius: 50px;
+  margin-bottom: 4px;
+}
+.team-slide-role {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.team-slider-arrows {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+.team-slider-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   border: 1px solid var(--border);
-  display: inline-block;
-  white-space: nowrap;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
 }
-.light .team-tooltip-name {
-  box-shadow: 0 8px 30px rgba(62,55,196,0.08);
-}
-.team-tooltip-role {
-  font-size: 0.75rem;
-  color: var(--secondary);
-  font-weight: 500;
-  margin-top: 4px;
-  letter-spacing: 0.5px;
-}
-
-/* === Ring animation & hover scale === */
-.orbit-ring {
-  animation: ring-spin 50s linear infinite;
-  transition: border-color 0.5s ease, scale 0.5s ease;
-  scale: 1;
+.team-slider-btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
 }
 
-.team-orbit:hover .orbit-ring {
-  scale: 1.04;
-  border-color: rgba(241,179,79,0.25);
-}
-
-.orbit-ring-glow {
-  transition: scale 0.5s ease;
-  scale: 1;
-}
-
-.team-orbit:hover .orbit-ring-glow {
-  scale: 1.04;
-}
-
-@keyframes ring-spin {
-  to { transform: rotate(360deg); }
-}
-
-/* === Responsive === */
 @media (max-width: 768px) {
-  .team-section { padding: 80px 0 130px; }
-  .orbit-ring { inset: 50px; }
-  .orbit-ring-glow { inset: 38px; }
-
-  .orbit-avatar {
-    width: 72px;
-    height: 72px;
-    margin: -36px 0 0 -36px;
-    font-size: 1rem;
-    transform: translateY(-190px) rotate(calc(var(--i) * -60deg));
-  }
-  @keyframes orbit-float {
-    0%, 100% { transform: translateY(-190px) rotate(calc(var(--i) * -60deg)); }
-    50% { transform: translateY(-200px) rotate(calc(var(--i) * -60deg)); }
-  }
-  .orbit-member:hover .orbit-avatar {
-    width: 84px;
-    height: 84px;
-    margin: -42px 0 0 -42px;
-    transform: translateY(-190px) rotate(calc(var(--i) * -60deg));
-  }
-
-  .orbit-hover {
-    width: 150px;
-    left: -75px;
-    transform: translateY(-190px) rotate(calc(var(--i) * -60deg)) translateY(58px);
-  }
-  .orbit-hover-name { font-size: 0.8rem; }
-  .orbit-hover-role { font-size: 0.7rem; }
-  .orbit-member:hover .orbit-hover {
-    transform: translateY(-190px) rotate(calc(var(--i) * -60deg)) translateY(66px);
-  }
-
-  .orbit-center { width: 68px; height: 68px; margin: -34px 0 0 -34px; }
-  .orbit-center-inner img { width: 50%; height: 50%; }
+  .team-slide { flex: 0 0 160px; }
+  .team-slide-img { width: 130px; height: 130px; }
 }
-
 @media (max-width: 480px) {
-  .team-section { padding: 60px 0 110px; }
-  .orbit-ring { inset: 36px; }
-  .orbit-ring-glow { inset: 26px; }
-
-  .orbit-avatar {
-    width: 58px;
-    height: 58px;
-    margin: -29px 0 0 -29px;
-    font-size: 0.85rem;
-    transform: translateY(-150px) rotate(calc(var(--i) * -60deg));
-  }
-  @keyframes orbit-float {
-    0%, 100% { transform: translateY(-150px) rotate(calc(var(--i) * -60deg)); }
-    50% { transform: translateY(-157px) rotate(calc(var(--i) * -60deg)); }
-  }
-  .orbit-member:hover .orbit-avatar {
-    width: 66px;
-    height: 66px;
-    margin: -33px 0 0 -33px;
-    transform: translateY(-150px) rotate(calc(var(--i) * -60deg));
-  }
-
-  .orbit-hover {
-    width: 120px;
-    left: -60px;
-    transform: translateY(-150px) rotate(calc(var(--i) * -60deg)) translateY(46px);
-  }
-  .orbit-hover-name { font-size: 0.7rem; }
-  .orbit-hover-role { font-size: 0.62rem; }
-  .orbit-member:hover .orbit-hover {
-    transform: translateY(-150px) rotate(calc(var(--i) * -60deg)) translateY(53px);
-  }
-
-  .orbit-center { width: 54px; height: 54px; margin: -27px 0 0 -27px; }
-  .orbit-center-inner img { width: 50%; height: 50%; }
+  .team-slide { flex: 0 0 140px; }
+  .team-slide-img { width: 110px; height: 110px; }
+  .team-slide-name { font-size: 0.9rem; }
+  .team-slide-role { font-size: 0.8rem; }
 }
+
+
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
