@@ -1275,6 +1275,8 @@ html[dir="rtl"] .video-mute-btn {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   transition: var(--transition);
+  text-decoration: none;
+  color: inherit;
 }
 
 .contact-info-card:hover {

@@ -3,11 +3,11 @@
   const toggle = document.getElementById('darkModeToggle');
   const body = document.body;
 
-  if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+  if (localStorage.getItem('theme') === 'light') {
+    body.classList.add('light');
+  } else {
     body.classList.remove('light');
     if (toggle) toggle.checked = true;
-  } else {
-    body.classList.add('light');
   }
 
   if (toggle) {
@@ -169,109 +169,6 @@
   });
 })();
 
-// === Card Video: Hover Play + Sound Toggle + Click Nav ===
-(function() {
-  let audioCtx = null;
-  const allCards = [];
-
-  function stopAllOthers(caller) {
-    allCards.forEach(entry => {
-      if (entry.card === caller) return;
-      entry.video.pause();
-      entry.video.muted = true;
-      entry.video.currentTime = 0;
-      entry.playingWithSound = false;
-      if (entry.muteBtn) {
-        entry.muteBtn.dataset.muted = 'true';
-        entry.muteBtn.innerHTML = '<i class="fas fa-volume-xmark"></i>';
-      }
-    });
-  }
-
-  document.querySelectorAll('.project-card').forEach(card => {
-    const video = card.querySelector('.card-video');
-    const visual = card.querySelector('.project-card-visual');
-    const link = card.querySelector('.project-card-link');
-    if (!video || !link) return;
-    const href = link.getAttribute('href');
-
-    const muteBtn = document.createElement('button');
-    muteBtn.className = 'video-mute-btn';
-    muteBtn.dataset.muted = 'true';
-    muteBtn.setAttribute('aria-label', 'قطع صدا');
-    muteBtn.innerHTML = '<i class="fas fa-volume-xmark"></i>';
-    visual.appendChild(muteBtn);
-
-    const entry = { card, video, muteBtn, playingWithSound: false };
-    allCards.push(entry);
-
-    function unlockAudio() {
-      if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }
-      if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-      }
-    }
-
-    function navigate() {
-      if (!href) return;
-      const el = document.querySelector('.page-transition');
-      if (el) { el.classList.add('active'); setTimeout(() => { window.location.href = href; }, 400); }
-      else { window.location.href = href; }
-    }
-
-    function playMuted() {
-      if (entry.playingWithSound) return;
-      video.muted = true;
-      video.volume = 1;
-      video.currentTime = 0;
-      video.play().catch(() => {});
-    }
-
-    function pauseVideo() {
-      if (entry.playingWithSound) return;
-      video.pause();
-    }
-
-    card.addEventListener('mouseenter', playMuted);
-    card.addEventListener('mouseleave', pauseVideo);
-
-    muteBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isMuted = muteBtn.dataset.muted === 'true';
-      if (isMuted) {
-        stopAllOthers(card);
-        unlockAudio();
-        entry.playingWithSound = true;
-        video.pause();
-        video.muted = false;
-        video.volume = 1;
-        video.currentTime = 0;
-        video.play().then(() => {
-          muteBtn.dataset.muted = 'false';
-          muteBtn.innerHTML = '<i class="fas fa-volume-high"></i>';
-        }).catch(() => {
-          entry.playingWithSound = false;
-        });
-      } else {
-        entry.playingWithSound = false;
-        video.muted = true;
-        muteBtn.dataset.muted = 'true';
-        muteBtn.innerHTML = '<i class="fas fa-volume-xmark"></i>';
-        if (!video.paused) {
-          video.pause();
-        }
-      }
-    });
-
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.video-mute-btn')) return;
-      navigate();
-    });
-  });
-})();
-
 // === Scroll to video section on page load ===
 (function() {
   if (window.location.hash === '#video') {
@@ -287,17 +184,93 @@
   }
 })();
 
-// === Team Slider Arrows ===
+// === Team Cover-Flow Carousel ===
 (function() {
-  const track = document.querySelector('.team-slider-track');
-  if (!track) return;
-  document.querySelectorAll('.team-slider-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const dir = btn.classList.contains('prev') ? -1 : 1;
-      const slideW = track.querySelector('.team-slide')?.offsetWidth || 200;
-      track.scrollBy({ left: slideW * dir + 24 * dir, behavior: 'smooth' });
+  const stage = document.getElementById('teamStage');
+  if (!stage) return;
+  const slides = Array.from(stage.querySelectorAll('.team-carousel-slide'));
+  const total = slides.length;
+  if (!total) return;
+
+  let current = 0;
+  let autoTimer = null;
+
+  function swap() {
+    slides.forEach((slide, i) => {
+      const p = ((i - current) % total + total) % total;
+      slide.className = `team-carousel-slide pos${p}`;
+      slide.classList.toggle('active', p === 0);
     });
+  }
+
+  function go(n) {
+    current = ((n % total) + total) % total;
+    swap();
+    if (autoTimer) { clearTimeout(autoTimer); }
+    autoTimer = setTimeout(prev, 3000);
+  }
+  function next() { go(current + 1); }
+  function prev() { go(current - 1); }
+
+  function resetDrag() {
+    stage.style.transition = '';
+    stage.style.transform = '';
+  }
+
+  let dragging = false, startX = 0, hasMoved = false;
+
+  stage.addEventListener('mousedown', (e) => {
+    dragging = true;
+    startX = e.clientX;
+    hasMoved = false;
+    stage.style.transition = 'none';
   });
+
+  window.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 5) hasMoved = true;
+    stage.style.transform = `translateX(${dx}px)`;
+  });
+
+  window.addEventListener('mouseup', (e) => {
+    if (!dragging) return;
+    dragging = false;
+    const dx = e.clientX - startX;
+    stage.style.transition = '';
+    stage.style.transform = '';
+    if (hasMoved) {
+      if (dx < -40) prev(); else if (dx > 40) next();
+    }
+  });
+
+  let tstartX = 0;
+  stage.addEventListener('touchstart', (e) => {
+    dragging = true;
+    tstartX = e.touches[0].clientX;
+    hasMoved = false;
+    stage.style.transition = 'none';
+  }, { passive: true });
+
+  stage.addEventListener('touchmove', (e) => {
+    if (!dragging) return;
+    const dx = e.touches[0].clientX - tstartX;
+    if (Math.abs(dx) > 5) hasMoved = true;
+    stage.style.transform = `translateX(${dx}px)`;
+  }, { passive: true });
+
+  stage.addEventListener('touchend', (e) => {
+    if (!dragging) return;
+    dragging = false;
+    const dx = e.changedTouches[0].clientX - tstartX;
+    resetDrag();
+    if (hasMoved) {
+      if (dx < -50) prev(); else if (dx > 50) next();
+    }
+  }, { passive: true });
+
+  swap();
+  autoTimer = setTimeout(prev, 3000);
 })();
 
 // === 3D Tilt Effect on Project Cards ===
@@ -321,33 +294,7 @@
   });
 })();
 
-// === Contact Form ===
-(function() {
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        subject: document.getElementById('subject').value,
-        message: document.getElementById('message').value
-      };
-      console.log('Form submitted:', formData);
 
-      const btn = contactForm.querySelector('.submit-btn');
-      const originalText = btn.textContent;
-      btn.textContent = 'Message Sent!';
-      btn.style.background = '#f1b34f';
-
-      setTimeout(() => {
-        btn.textContent = originalText;
-        btn.style.background = '';
-        contactForm.reset();
-      }, 3000);
-    });
-  }
-})();
 
 // === Plyr Video Player ===
 (function() {

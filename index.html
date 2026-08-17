@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
 </head>
 <body>
 
@@ -26,14 +27,14 @@
       <label for="darkModeToggle"></label>
     </div>
     <a href="index.html" class="logo">
-      <img src="logo.png" alt="نیل استودیو" style="height: 56px; width: auto;">
+      <img draggable="false" src="logo.png" alt="نیل استودیو" style="height: 67px; width: auto;">
     </a>
   </header>
 
   <section class="hero hero-video">
     <div class="hero-video-bg">
-      <video autoplay muted loop playsinline poster="poster.jpg">
-        <source src="https://korm33nvzw24hbv4.public.blob.vercel-storage.com/upload-GqRyepkdAjiF1aF5H1GgogOfXyxjvA" type="video/mp4">
+      <video id="heroVideo" autoplay muted loop playsinline>
+        <source src="videos/Site-Nilstudio.mp4" type="video/mp4">
       </video>
 
     </div>
@@ -41,7 +42,6 @@
     <div class="hero-glow"></div>
 
       <div class="hero-content">
-
     </div>
 
     <div class="hero-scroll">
@@ -53,27 +53,13 @@
   <section class="projects-section" id="projects">
     <div class="container">
       <div class="projects-header">
-        <div class="section-badge reveal">آثار اخیر</div>
         <h2 class="section-title reveal">روایت‌هایی که <span class="gradient-text">ساختیم</span></h2>
-        <p class="section-subtitle reveal" style="margin: 0 auto;">
-          هر پروژه یک داستان منحصربه‌فرد است. حاصل ساعت‌ها فکر، بحث و آزمون و خطای تیم ما.
-        </p>
-      </div>
+        </div>
 
       <div class="projects-grid">
         <div class="project-card reveal">
           <div class="project-card-content">
-            <div class="project-card-label">وب کمیک · نوجوان</div>
-            <h3 class="project-card-title">شهباز</h3>
-            <p class="project-card-desc">
-              شهباز یه کمیکه. این اثر زیرمجموعه‌ای از یه جهان داستانیه به نام سپنتا. فرآیند تولیدش نزدیک به 2 ساله که در حال انجامه و بیش از 30 هنرمند جوون و خوش‌ذوق دارن روی اثری مناسب مخاطب نوجوونای این مملکت کار می‌کنن.
-            </p>
-            <div class="project-card-tags">
-              <span class="project-tag">وب کمیک</span>
-              <span class="project-tag">جهان داستانی</span>
-              <span class="project-tag">نوجوان</span>
-              <span class="project-tag">سپنتا</span>
-            </div>
+            <h3 class="project-card-title">وب کمیک شهباز</h3>
             <a href="project-shahbaz.html" class="project-card-link">
               <i class="fas fa-arrow-left"></i> مشاهده پروژه
             </a>
@@ -89,92 +75,60 @@
 
         <div class="project-card reveal">
           <div class="project-card-content">
-            <div class="project-card-label">موشن · اجتماعی</div>
             <h3 class="project-card-title">به نام خدای کودکان میناب</h3>
-            <p class="project-card-desc">
-              بچه‌های میناب، فرشته‌هایی بودن که خیلی زود از بینمون پر کشیدن. در این روایت خیالی، اون‌ها یه بار دیگه به زمین فوتبال برمی‌گردن؛ نه به عنوان تماشاگر، بلکه در کنار تیم ملی ایران. ادای احترامی به لبخندهایی که خاموش شدن.
-            </p>
-            <div class="project-card-tags">
-              <span class="project-tag">موشن گرافیک</span>
-              <span class="project-tag">اجتماعی</span>
-              <span class="project-tag">فوتبال</span>
-              <span class="project-tag">تیم ملی</span>
-            </div>
             <a href="project-minab.html#video" class="project-card-link">
               <i class="fas fa-arrow-left"></i> مشاهده پروژه
             </a>
           </div>
           <div class="project-card-visual">
-            <video class="card-video" src="https://korm33nvzw24hbv4.public.blob.vercel-storage.com/upload-iJH3GiiTBpzkNFLOtLYG0NURc0yPLm" loop playsinline preload="metadata"></video>
+            <video class="card-video plyr-video" loop playsinline preload="metadata">
+              <source src="https://korm33nvzw24hbv4.public.blob.vercel-storage.com/upload-iJH3GiiTBpzkNFLOtLYG0NURc0yPLm" type="video/mp4">
+            </video>
             <div class="project-card-visual-overlay"></div>
           </div>
         </div>
 
         <div class="project-card reveal">
           <div class="project-card-content">
-            <div class="project-card-label">موشن · اسطوره‌ای</div>
-            <h3 class="project-card-title">اسطوره‌ها</h3>
-            <p class="project-card-desc">
-              اگه رستم، آرش، اسفندیار، کاوه آهنگر و پهلوانان دیگه امروز حضور داشتن، چیکار می‌کردن؟ ما باور داریم اسطوره‌های شاهنامه، از دل تاریخ، پشتیبان فرزندان امروز ایران هستن؛ چه در زمین فوتبال، چه در جهانی که توش زندگی می‌کنیم.
-            </p>
-            <div class="project-card-tags">
-              <span class="project-tag">موشن گرافیک</span>
-              <span class="project-tag">اسطوره‌شناسی</span>
-              <span class="project-tag">شاهنامه</span>
-              <span class="project-tag">فرهنگی</span>
-            </div>
+            <h3 class="project-card-title">اسطوره‌ها، به کمک ملی‌پوشان آمدند!</h3>
             <a href="project-osstoreh.html#video" class="project-card-link">
               <i class="fas fa-arrow-left"></i> مشاهده پروژه
             </a>
           </div>
           <div class="project-card-visual">
-            <video class="card-video" src="https://korm33nvzw24hbv4.public.blob.vercel-storage.com/upload-fXag1rPOlh4Xpc5q2HO01uYQqqB3u4" loop playsinline preload="metadata"></video>
+            <video class="card-video plyr-video" loop playsinline preload="metadata">
+              <source src="https://korm33nvzw24hbv4.public.blob.vercel-storage.com/upload-fXag1rPOlh4Xpc5q2HO01uYQqqB3u4" type="video/mp4">
+            </video>
             <div class="project-card-visual-overlay"></div>
           </div>
         </div>
 
         <div class="project-card reveal">
           <div class="project-card-content">
-            <div class="project-card-label">موشن · ملی</div>
-            <h3 class="project-card-title">حمایت از تیم ملی</h3>
-            <p class="project-card-desc">
-              یه ایران پشت تیم ملیه! با وجود همه کمی و کاستی‌ها تیم ملی به آمریکا رفت و تو جام جهانی شرکت کرد. فارغ از اینکه بچه ناف تهران باشی یا شمالی یا آذری یا کرد و بلوچ و لر؛ یه ایران پشت تیم ملی کشورشه.
-            </p>
-            <div class="project-card-tags">
-              <span class="project-tag">موشن گرافیک</span>
-              <span class="project-tag">ملی</span>
-              <span class="project-tag">جام جهانی</span>
-              <span class="project-tag">حمایتی</span>
-            </div>
+            <h3 class="project-card-title">یه ایران پشت تیم ملیه</h3>
             <a href="project-hemayat.html#video" class="project-card-link">
               <i class="fas fa-arrow-left"></i> مشاهده پروژه
             </a>
           </div>
           <div class="project-card-visual">
-            <video class="card-video" src="https://korm33nvzw24hbv4.public.blob.vercel-storage.com/upload-WHH7dVtEXjqhcGaKXlZGSkJSc6cdsO" loop playsinline preload="metadata"></video>
+            <video class="card-video plyr-video" loop playsinline preload="metadata">
+              <source src="https://korm33nvzw24hbv4.public.blob.vercel-storage.com/upload-WHH7dVtEXjqhcGaKXlZGSkJSc6cdsO" type="video/mp4">
+            </video>
             <div class="project-card-visual-overlay"></div>
           </div>
         </div>
 
         <div class="project-card reveal">
           <div class="project-card-content">
-            <div class="project-card-label">انیمیشن · آموزشی</div>
             <h3 class="project-card-title">آب، مایه حیات</h3>
-            <p class="project-card-desc">
-              یه قطره آب، می‌تونه شروعِ یه قصه باشه، شروعِ یه جهان تازه. برای اصلاح الگوی مصرف آب با بچه‌ها، نرفتیم سراغ نصیحت. براشون یک شخصیت بامزه و دوست‌داشتنی به اسم «چکه» ساختیم که وارد دنیای بچه‌ها می‌شه و قصه خودش رو تعریف می‌کنه.
-            </p>
-            <div class="project-card-tags">
-              <span class="project-tag">انیمیشن</span>
-              <span class="project-tag">آموزشی</span>
-              <span class="project-tag">کودک</span>
-              <span class="project-tag">فرهنگ‌سازی</span>
-            </div>
             <a href="project-abfa.html#video" class="project-card-link">
               <i class="fas fa-arrow-left"></i> مشاهده پروژه
             </a>
           </div>
           <div class="project-card-visual">
-            <video class="card-video" src="https://korm33nvzw24hbv4.public.blob.vercel-storage.com/upload-WRgxTX6Z26lm0wO1dSUe0dDabnWZsS" loop playsinline preload="metadata"></video>
+            <video class="card-video plyr-video" loop playsinline preload="metadata">
+              <source src="https://korm33nvzw24hbv4.public.blob.vercel-storage.com/upload-WRgxTX6Z26lm0wO1dSUe0dDabnWZsS" type="video/mp4">
+            </video>
             <div class="project-card-visual-overlay"></div>
           </div>
         </div>
@@ -187,51 +141,47 @@
   <section class="team-section" id="team">
     <div class="container">
       <div class="team-header">
-        <div class="section-badge reveal">تیم ما</div>
-        <h2 class="section-title reveal">داستان‌سازان <span class="gradient-text">نیل</span></h2>
+        <h2 class="section-title reveal">تیم ما</h2>
       </div>
 
       <p class="team-description reveal">
         پشت هر روایتی که می‌بینی، چند تا جوون خلاق، کنجکاو و دقیق ساعت‌ها روش فکر کردن، بحث کردن و آزمون و خطا کردن تا به بهترین نتیجه برسن.
       </p>
 
-      <div class="team-slider">
-        <div class="team-slider-track">
-          <div class="team-slide">
-            <div class="team-slide-img"><img src="team/صادق زاده.jpg" alt="محمدرضا صادق‌زاده"></div>
+      <div class="team-carousel">
+        <div class="team-carousel-stage" id="teamStage">
+          <div class="team-carousel-slide">
+            <div class="team-slide-img"><img draggable="false" src="team/محمدرضا صادق زاده.png" alt="محمدرضا صادق‌زاده"></div>
             <div class="team-slide-name">محمدرضا صادق‌زاده</div>
-            <div class="team-slide-role">مدیر استودیو</div>
+            <div class="team-slide-role">مدیرعامل</div>
           </div>
-          <div class="team-slide">
-            <div class="team-slide-img"><img src="team/آیدین طلایی.JPG" alt="آیدین طلایی"></div>
-            <div class="team-slide-name">آیدین طلایی</div>
-            <div class="team-slide-role">طراح و انیماتور</div>
-          </div>
-          <div class="team-slide">
-            <div class="team-slide-img"><img src="team/پور محمدیان.jpg" alt="امین پورمحمدیان"></div>
-            <div class="team-slide-name">امین پورمحمدیان</div>
-            <div class="team-slide-role">نویسنده و راوی</div>
-          </div>
-          <div class="team-slide">
-            <div class="team-slide-img"><img src="team/امینی.png" alt="محمدجواد امینی"></div>
-            <div class="team-slide-name">محمدجواد امینی</div>
-            <div class="team-slide-role">تدوین‌گر</div>
-          </div>
-          <div class="team-slide">
-            <div class="team-slide-img"><img src="team/نیلا محسنی.PNG" alt="نیلوفر محسنی"></div>
-            <div class="team-slide-name">نیلوفر محسنی</div>
-            <div class="team-slide-role">طراح گرافیک</div>
-          </div>
-          <div class="team-slide">
-            <div class="team-slide-img"><img src="team/آرمین صانعی.jpg" alt="آرمین صانعی"></div>
+          <div class="team-carousel-slide">
+            <div class="team-slide-img"><img draggable="false" src="team/آرمین صانعی.png" alt="آرمین صانعی"></div>
             <div class="team-slide-name">آرمین صانعی</div>
-            <div class="team-slide-role">توسعه‌دهنده</div>
+            <div class="team-slide-role">متخصص هوش مصنوعی</div>
+          </div>
+          <div class="team-carousel-slide">
+            <div class="team-slide-img"><img draggable="false" src="team/نیلا محسنی.PNG" alt="نیلوفر محسنی"></div>
+            <div class="team-slide-name">نیلوفر محسنی</div>
+            <div class="team-slide-role">متخصص هوش مصنوعی</div>
+          </div>
+          <div class="team-carousel-slide">
+            <div class="team-slide-img"><img draggable="false" src="team/محمد جواد امینی.png" alt="محمدجواد امینی"></div>
+            <div class="team-slide-name">محمدجواد امینی</div>
+            <div class="team-slide-role">مدیر هوش مصنوعی</div>
+          </div>
+          <div class="team-carousel-slide">
+            <div class="team-slide-img"><img draggable="false" src="team/امین پور محمدیان.png" alt="امین پورمحمدیان"></div>
+            <div class="team-slide-name">امین پورمحمدیان</div>
+            <div class="team-slide-role">مدیر هوش مصنوعی</div>
+          </div>
+          <div class="team-carousel-slide">
+            <div class="team-slide-img"><img draggable="false" src="team/آیدین طلایی.png" alt="آیدین طلایی"></div>
+            <div class="team-slide-name">آیدین طلایی</div>
+            <div class="team-slide-role">مدیر تولید</div>
           </div>
         </div>
-        <div class="team-slider-arrows">
-          <button class="team-slider-btn prev" aria-label="قبلی"><i class="fas fa-chevron-right"></i></button>
-          <button class="team-slider-btn next" aria-label="بعدی"><i class="fas fa-chevron-left"></i></button>
-        </div>
+
       </div>
     </div>
   </section>
@@ -239,11 +189,9 @@
   <section class="quote-section">
     <div class="container">
       <div class="quote-block reveal">
-        <div class="quote-icon">"</div>
         <p class="quote-text">
           ما عاشق ساختن داستان‌هایی هستیم که ارزش تعریف‌شدن داشته باشن.
         </p>
-        <div class="quote-author">— نیل استودیو</div>
       </div>
     </div>
   </section>
@@ -252,21 +200,10 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="logo.png" alt="نیل استودیو" style="height: 28px; width: auto; margin-bottom: 16px;">
-          <p>استودیوی طراحی و روایت داستان‌های تصویری. ما داستان می‌سازیم.</p>
-          <div class="footer-social">
-            <a href="https://t.me/nilstudiooo" target="_blank" aria-label="Telegram"><i class="fab fa-telegram-plane"></i></a>
-            <a href="https://www.instagram.com/nilstudioo" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          </div>
+          <img draggable="false" src="logo.png" alt="نیل استودیو" style="height: 28px; width: auto; margin-bottom: 16px;">
         </div>
         <div class="footer-links">
-          <h4>دسترسی سریع</h4>
-          <a href="index.html">آثار</a>
-          <a href="about.html">درباره ما</a>
-          <a href="contact.html">تماس</a>
-        </div>
-        <div class="footer-links">
-          <h4>ارتباط</h4>
+          <h4>ارتباط با ما</h4>
           <a href="tel:+989107624589">۰۹۱۰۷۶۲۴۵۸۹</a>
           <a href="contact.html">ارسال پیام</a>
           <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.7; margin-top: 8px;">
@@ -275,11 +212,12 @@
         </div>
       </div>
       <div class="footer-bottom">
-        &copy; 2025 نیل استودیو. ساخته شده با عشق.
+        ساخته شده مطابق قوانین جمهوری اسلامی ایران
       </div>
     </div>
   </footer>
 
+  <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
